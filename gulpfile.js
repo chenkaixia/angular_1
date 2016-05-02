@@ -34,16 +34,32 @@ gulp.task('clean', function() {
 
 //单独压缩requirejs
 gulp.task('script', function() {
-    return  gulp.src(['js/lib/requirejs/require.js'], {base: 'js'})
+   gulp.src(['js/lib/requirejs/require.js'], {base: 'js'})
         .pipe(uglify())
         .pipe(gulp.dest('dist/js'));
+
+    gulp.src(['js/md5.js'], {base: 'js'})
+        .pipe(uglify())
+        .pipe(gulp.dest('dist/js'));
+
 });
 
 gulp.task('index', function() {
-    return gulp.src(['index.html'])
-        .pipe(gulp.dest('dist'));
+    return gulp.src('index.html').pipe(gulp.dest('dist'));
 });
 
+gulp.task('modules', function() {
+    return gulp.src('./modules/**')
+        .pipe(gulp.dest('dist/modules'));
+});
+gulp.task('res', function() {
+     gulp.src('./fonts/**')
+        .pipe(gulp.dest('dist/fonts'));
+    gulp.src('./css/ionic.min.css')
+        .pipe(gulp.dest('dist/css'));
+    gulp.src('./res/**')
+        .pipe(gulp.dest('dist/res'));
+});
 //根据依赖合并压缩libs
 gulp.task('require', function(taskReady) {
     var requirejsConfig = {
@@ -71,39 +87,26 @@ gulp.task('require', function(taskReady) {
 
 //给js文件添加版本号
 gulp.task('rev-require', ['require', 'script'], function() {
-    gulp.src('dist/build/js/*.js', {base: 'dist/build'})
-        .pipe(rev())
+   return  gulp.src('dist/build/js/*.js', {base: 'dist/build'})
         .pipe(gulp.dest('dist'))
-        .pipe(rev.manifest({
-            path: 'dist/build/rev-manifest.json',
-            base: 'dist/build',
-            merge: true
-        }))
         .pipe(gulp.dest('dist/build'));
 });
 
-gulp.task("rev-replace-index", ['index', 'rev-require'], function(){
-    var manifest = gulp.src('dist/build/rev-manifest.json');
-    return gulp.src('dist/index.html')
-        .pipe(revReplace({
-            manifest: manifest,
-            modifyUnreved: replaceJs,
-            modifyReved: replaceJs
-        }))
-        .pipe(gulp.dest('dist'));
+gulp.task("rev-replace-index", ['index','rev-require'], function(){
+    return gulp.src('dist/index.html').pipe(gulp.dest('dist'));
 });
 
 gulp.task('dev-less', function() {
     return gulp.src(paths.less)
         .pipe(less())
-        .pipe(gulp.dest('css'));
+        .pipe(gulp.dest('dist/css'));
 });
 
 gulp.task('watch', function() {
     gulp.watch(paths.less, ['dev-less']);
 });
 
-gulp.task('build', ['rev-replace-index'], function() {
+gulp.task('build', ['rev-replace-index','dev-less','modules','res'], function() {
     return del.sync(['dist/build/**']);
 });
 gulp.task('prod', ['clean'], function() {
