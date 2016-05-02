@@ -1,0 +1,14 @@
+{
+  "data": {
+    "product_id":"12",
+    "product_name":"123333",
+    "origin_price":"122.00",
+    "price":"88.00",
+    "currency_type":0,
+    "images":["res/u18.png","res/u18.png"],
+    "description":"22",
+    "owner_id":"12"
+  },
+  "msg": "",
+  "status": 0
+}

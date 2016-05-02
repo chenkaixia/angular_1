@@ -1,0 +1,69 @@
+<div class="location-container showLocation" ng-class="{'search-focus':search_focus_on}" ng-click="select_city($event)">
+    <div class="search-city" ng-show="data.search_city">
+    <div class="search-view" >
+        <input type="text" placeholder="搜索城市" ng-focus="search_focus(true)" ng-model="data.search_name" ng-change="search_city()">
+        <span ng-click="search_focus(false)">取消</span>
+    </div>
+    <div class="search-result-container">
+        <ion-content>
+            <div class="list-view">
+                <div class="list" >
+                    <p class="list-item" ng-repeat="site in data.search_list"  data-id="{{site.city_id}}" data-name="{{site.city}}" ng-bind="site.city"></p>
+                </div>
+            </div>
+        </ion-content>
+    </div>
+    </div>
+    <div class="search-school">
+    <div class="search-view" ng-show="!data.search_city" >
+        <input type="text" placeholder="搜索学校" ng-focus="search_focus(true)" ng-model="data.search_school_name" ng-change="search_school()">
+        <span ng-click="search_focus(false)">取消</span>
+    </div>
+    <div class="search-result-container">
+        <ion-content>
+            <div class="list-view">
+                <div class="list" >
+                    <p class="list-item" ng-repeat="site in data.search_school_list"  site-id="{{site.site_id}}" site-name="{{site.site_name}}" ng-bind="site.site_name"></p>
+                </div>
+            </div>
+        </ion-content>
+    </div>
+    </div>
+    <ion-content class="scroll-view" ng-class="{'ng-hide':data.recommend_hide}">
+        <!--<div class="block-view">
+          <p class="view-title"><i class="location"></i><span>定位</span></p>
+          <label class="city-block">杭州</label>
+        </div>-->
+        <div class="list-city" >
+        <div class="block-view" >
+            <p class="view-title">热门城市</p>
+            <label class="city-block" ng-repeat=" city in data.recommend_cities" data-id="{{city.city_id}}" data-name="{{city.city}}" ng-bind="city.city"></label>
+        </div>
+
+        <div class="list-view" ng-repeat="group in data.city_group">
+
+            <p class="view-title-small" ng-bind="group.initial"></p>
+
+            <div class="list">
+
+                <p class="list-item"  ng-repeat="city in group.cities" data-id="{{city.city_id}}" data-name="{{city.city}}" ng-bind="city.city"></p>
+
+            </div>
+        </div>
+        </div>
+    </ion-content>
+    <ion-content class="scroll-view" ng-class="{'ng-show':!data.recommend_hide}">
+        <div ng-class="list-zones" >
+            <div class="list-view" ng-repeat="zones_group in data.zones">
+
+                <p class="view-title-small" ng-bind="zones_group.name"></p>
+
+                <div class="list">
+
+                    <p class="list-item"  ng-repeat="site in zones_group.sites" site-id="{{site.site_id}}" site-name="{{site.name}}" ng-bind="site.name"></p>
+
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</div>

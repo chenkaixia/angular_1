@@ -1,0 +1,53 @@
+<div class="order" id="order">
+    <div class="order-address">
+        <div class="title-bar">
+            <div>
+                请确认收货地址
+            </div>
+        </div>
+
+        <label class="order-item-input">
+            <span class="order-input-label">学校名称</span>
+            <div class="jump" ng-click="open_select_school()">
+                <input type="text" placeholder="请选择学校" readonly ng-model="data.school_name">
+            </div>
+        </label>
+        <label class="order-item-input">
+            <span class="order-input-label">详细地址</span>
+            <div>
+                <input type="text" placeholder="请填写详细地址" ng-model="order_data.receiver_address">
+            </div>
+        </label>
+        <label class="order-item-input">
+            <span class="order-input-label">手机号码</span>
+            <div class="none-line">
+                <input type="tel" pattern="[0-9]*" placeholder="请填写手机号码"  ng-model="order_data.phone">
+            </div>
+        </label>
+    </div>
+    <div class="order-detail">
+        <div class="order-product-img">
+            <img ng-src="{{order_data.img}}">
+        </div>
+        <div class="order-desc-container">
+            <div class="order-desc" ng-bind="order_data.product_name"></div>
+            <div class="order-price-container">
+                <div class="order-price">￥{{order_data.price}}</div>
+                <div class="order-num">x{{order_data.num}}</div>
+                <div class="top-num">合计:<span>￥{{order_data.total_amount}}</span></div>
+            </div>
+        </div>
+    </div>
+    <div class="message-container jump" ng-click="openModal()">
+        <div class="message">留言</div>
+        <div>选填</div>
+    </div>
+    <div class="message-detail" ng-bind="order_data.remark"></div>
+
+    <div class="pay-bar">
+        <div>共计:<span class="total_price">￥{{order_data.total_amount}}</span></div>
+        <button  class="button-pay" ng-click="submit_order()">提交订单</button>
+    </div>
+</div>
+<div id="select-school"ng-if="show_select" ng-include="'./modules/select_school/select_city.html'"></div>
+<div id="remark" ng-if="show_remark" ng-include="'./modules/product_order/remark.html'"></div>

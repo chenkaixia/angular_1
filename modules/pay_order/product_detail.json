@@ -1,0 +1,21 @@
+{
+  "paymethods": [{
+    "pay_type": 2,
+    "name": "微信支付",
+    "icon": "http://static.59store.com/app/paytype/ic_sharewechat.png",
+    "description": "推荐已安装微信客户端的用户使用",
+    "promotion": "满5减1"
+  }, {
+    "pay_type": 1,
+    "name": "支付宝支付",
+    "icon": "http://static.59store.com/app/paytype/ic_alipay.png",
+    "description": "推荐已安装支付宝客户端的用户使用",
+    "promotion": ""
+  }, {
+    "pay_type": 8,
+    "name": "钱包支付",
+    "icon": "http://static.59store.com/app/paytype/ic_pay_huabuwan.png",
+    "description": "推荐已开通信用钱包的用户使用",
+    "promotion": ""
+  } ]
+}

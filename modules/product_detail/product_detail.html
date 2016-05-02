@@ -1,0 +1,39 @@
+<div class="product-detail-content">
+    <div class="content-div">
+        <ion-content>
+            <ion-slide-box class="product-imgs">
+                <ion-slide ng-repeat=" image in product_detail.images">
+                    <img ng-src="{{image}}" class="product-detail-img"/>
+                </ion-slide>
+            </ion-slide-box>
+            <div class="product-detail-container">
+                <div class="product-detail-name" ng-bind="product_detail.product_name">
+                </div>
+                <div class="product-detail-price-container">
+                    <div class="product-detail-price">￥{{product_detail.price}}</span></div>
+                    <del class="product-detail-origin-price">￥{{product_detail.origin_price}}</span></del>
+                    <div class="mail">
+                        <span>包邮</span>
+                    </div>
+                    <div class="product-num-container">
+                        <div class="product-num-minus" ng-click="set_num(-1)"></div>
+                        <div class="product-num" ng-bind="product_detail.num"></div>
+                        <div class="product-num-add" ng-click="set_num(1)"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="product-detail-des-container">
+                <div class="product-des-title">
+                    商品详情介绍
+                </div>
+                <div class="product-detail-des">
+                    <div ng-bind-html="product_detail.description"></div>
+                </div>
+            </div>
+        </ion-content>
+    </div>
+    <div class="pay-bar">
+        <div>共计:<span class="total_price">￥{{product_detail.total_amount}}</span></div>
+        <button class="button-pay" ng-click="go_order()">立即购买</button>
+    </div>
+</div>

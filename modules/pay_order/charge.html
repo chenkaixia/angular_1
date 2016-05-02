@@ -1,0 +1,28 @@
+
+    <div>
+        <div ng-show="data_model.show_password" class="password-msg">
+         <div>
+            <p class="charge-limit">59钱包(剩余消费额度{{data_model.available_consume}})</p>
+            <p class="charge-amount">￥{{order_data.amount}}</p>
+        </div>
+    <div class='password-div'>
+        <div>
+            <span ng-bind="passwords[0]"></span>
+            <span ng-bind="passwords[1]"></span>
+            <span ng-bind="passwords[2]"></span>
+            <span ng-bind="passwords[3]"></span>
+            <span ng-bind="passwords[4]"></span>
+            <span ng-bind="passwords[5]"></span>
+        </div>
+        <input  id="chargePassword" type="tel" pattern="[0-9]*" maxlength="6" ng-change="change_password()" ng-model="data_model.charge_password" />
+    </div>
+        </div>
+        <div ng-show="!data_model.show_password" class="password-error">
+            <p class="error-title">提醒</p>
+            <p class="error-msg" ng-bind="data_model.password_msg"></p>
+        </div>
+    <div class="charge-bar">
+        <div ng-click="wallet_pay(false)">取消</div>
+        <div ng-click="wallet_pay(true)">确认</div>
+    </div>
+    </div>

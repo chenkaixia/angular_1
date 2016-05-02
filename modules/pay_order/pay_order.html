@@ -1,0 +1,24 @@
+<div class="pay-container">
+    <div class="amount">实付金额:<span>￥{{order_data.amount}}</span></div>
+    <div class="pay-title">支付方式</div>
+    <div class="pay-type-div">
+        <ion59-radio ng-repeat=" method in data_model.pay_methods"  ng-model="data_model.pay_type"  ng-disabled="{{method.disabled}}" ng-value="method.pay_type">
+            <div class="pay-label-div">
+                <div class="pay-img pay-img-{{method.pay_type}}">
+                </div>
+                <div class="pay-text">
+                    <div ng-bind="method.name"></div>
+                    <div class="pay-amount" ng-bind-html="method.description"></div>
+                </div>
+            </div>
+        </ion59-radio>
+        <div class="account-status" ng-if="pay_not_open" ng-click="open_pay()" >立即开通</div>
+    </div>
+    <div class="pay-submit-div">
+        <button ng-click="submit_pay($event)">
+            确认支付
+        </button>
+    </div>
+    <div class="pay-mask" ng-if="password_show"></div>
+    <div  ng-include="'./modules/pay_order/charge.html'" class="charge-modal" ng-show="password_show"></div>
+</div>

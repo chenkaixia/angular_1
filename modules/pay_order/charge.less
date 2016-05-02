@@ -1,0 +1,118 @@
+@scale: 25;
+.page-wrap() {
+  display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+  display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;      /* TWEENER - IE 10 */
+  display: -webkit-flex;     /* NEW - Chrome */
+  display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
+}
+.flex-column(){
+  -webkit-box-orient: vertical;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
+  -o-flex-direction: column;
+  flex-direction: column;
+}
+.flex1(){
+  -webkit-box-flex: 1;	  /* OLD - iOS 6-, Safari 3.1-6 */
+  -moz-box-flex: 1;		 /* OLD - Firefox 19- */
+  -webkit-flex: 1;		  /* Chrome */
+  -ms-flex: 1;			  /* IE 10 */
+  flex: 1;				  /* NEW, Spec - Opera 12.1, Firefox 20+ */
+}
+
+
+.charge-modal{
+  position: absolute;
+  background-color: #fff;
+  width: 270rem/@scale;
+  height: 182rem/@scale;
+  border-radius: 5px;
+  border: solid 1px #E1E3E3;
+  top: 40rem/@scale;
+  left: 50rem/@scale;
+  z-index: 2000;
+  &>div{
+    position: relative;
+    height: 100%;
+    width: 100%;
+  }
+  .charge-limit{
+    font-size: 17px;
+    color: #333333;
+    text-align: center;
+  }
+  .charge-amount{
+    text-align: center;
+    font-size: 15px;
+    color: #F9A502;
+  }
+  .password-div{
+    width: 100%;
+    position: relative;
+    &>div{
+      .page-wrap;
+      margin: auto;
+      width: 240rem/@scale;
+    }
+    span{
+      border: 1px solid #ccc;
+      border-right:0 ;
+      width: 40rem/@scale;
+      height: 36rem/@scale;
+      display: block;
+      text-align: center;
+      line-height: 44rem/@scale;
+      font-size: 26px;
+    }
+    span:last-child{
+      border-right:1px solid #ccc;
+    }
+    input{
+      opacity: 0;
+      color: #fff;
+      width: 100%;
+      height: 100%;
+      display: block;
+      position: absolute;
+      z-index: 1010;
+      top: 0;
+    }
+  }
+  .charge-bar{
+    .page-wrap;
+    border-top: solid 1px #ccc;
+    height: 43rem/@scale;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    &>div{
+      width: 50%;
+      text-align: center;
+      color: #07A9FA;
+      font-size: 17px;
+      line-height: 43rem/@scale;
+      border-right: solid 1px #ccc;
+    }
+    &>div:last-child{
+      border-right:0;
+    }
+  }
+}
+.password-msg{
+  padding-top: 20rem/@scale;
+}
+.password-error{
+  padding-top: 40rem/@scale;
+  .error-title{
+    font-size: 17px;
+    text-align: center;
+    color: #333333;
+  }
+  .error-msg{
+    font-size: 15px;
+    text-align: center;
+    color: #666666;
+  }
+}
