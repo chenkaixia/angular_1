@@ -30,6 +30,8 @@ define(['angular','app', '../product_list/product_service'], function (angular,a
                 var products = data.data&&data.data.products;
                 if (products == null) {
                     $scope.dataModel.more_data = false;
+                    var msg = data&&data.msg?data.msg:"网络问题";
+                    $rootScope.alert_show(msg);
                     return false;
                 }
                 $scope.dataModel.list = $scope.dataModel.list.concat(data.data.products);
@@ -39,6 +41,7 @@ define(['angular','app', '../product_list/product_service'], function (angular,a
                 }
             },function () {
                 $scope.$broadcast('scroll.infiniteScrollComplete');
+                $rootScope.alert_show("网络问题");
             });
         }
 

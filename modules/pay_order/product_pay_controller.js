@@ -1,6 +1,6 @@
 define(['angular', 'app', '../pay_order/product_pay_service'], function (angular, app) {
     'use strict';
-    app.controller('product_pay_controller', ['$scope', 'product_pay_service', '$stateParams', '$state', '$ionicPopup', '$timeout', function ($scope, product_pay_service, $stateParams, $state,$ionicPopup,$timeout) {
+    app.controller('product_pay_controller', ['$rootScope','$scope', 'product_pay_service', '$stateParams', '$state', '$ionicPopup', '$timeout', function ($rootScope,$scope, product_pay_service, $stateParams, $state,$ionicPopup,$timeout) {
         document.title="支付订单";
         var order ={
             order_sn:"",
@@ -27,12 +27,19 @@ define(['angular', 'app', '../pay_order/product_pay_service'], function (angular
         product_pay_service.get_pay_status.get({
             order_id:order.order_sn
         }).$promise.then(function (data) {
+            if(data.status!=0){
+                var msg = data&&data.msg?data.msg:"网络问题";
+                $rootScope.alert_show(msg);
+                return false;
+            }
             if(data.data.status==0){
                 localStorage.setItem("pay_result",JSON.stringify(data.data));
                 $state.go('pay_result');
             }else{
                 init_pay()
             }
+        },function () {
+            $rootScope.alert_show("网络问题");
         });
         init_pay();
         function init_pay() {
@@ -62,8 +69,11 @@ define(['angular', 'app', '../pay_order/product_pay_service'], function (angular
                         $scope.pay_not_open=true;
                     }
                 }else{
-
+                    var msg = data&&data.msg?data.msg:"网络问题";
+                    $rootScope.alert_show(msg);
                 }
+            },function () {
+                $rootScope.alert_show("网络问题");
             }).then(function () {
                 return product_pay_service.get_pay_methods.get({
                     order_type:13,
@@ -76,7 +86,12 @@ define(['angular', 'app', '../pay_order/product_pay_service'], function (angular
                     _:1461740178277
                 }).$promise;
             }).then(function (data) {
-                var methodes = data.data.paymethods;
+                if(data.status!=0){
+                    var msg = data&&data.msg?data.msg:"网络问题";
+                    $rootScope.alert_show(msg);;
+                    return false;
+                }
+                var methodes = data.data&&data.data.paymethods;
                 angular.forEach(methodes, function (method) {
                     if (method.pay_type == 8) {
                         var _description =method.description
@@ -84,6 +99,7 @@ define(['angular', 'app', '../pay_order/product_pay_service'], function (angular
                         method.disabled = method_disabled;
                         if($scope.pay_not_open){
                             method.description = _description;
+                            method.pay_not_open=true;
                         }
                     } else {
                         method.disabled = false;
@@ -92,6 +108,8 @@ define(['angular', 'app', '../pay_order/product_pay_service'], function (angular
 
                 });
                 $scope.data_model.pay_methods = methodes;
+            },function () {
+                $rootScope.alert_show("网络问题");
             });
         }
 
@@ -178,6 +196,8 @@ define(['angular', 'app', '../pay_order/product_pay_service'], function (angular
                             $scope.data_model.show_password = false;
                             $scope.data_model.password_msg=data.msg;
                         }
+                    },function () {
+                        
                     });
                 }catch(e){
                     alert(e.toString());

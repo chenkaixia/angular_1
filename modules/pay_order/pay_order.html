@@ -11,8 +11,9 @@
                     <div class="pay-amount" ng-bind-html="method.description"></div>
                 </div>
             </div>
+            <div class="account-status" ng-if="method.pay_not_open" ng-click="open_pay()" >立即开通</div>
         </ion59-radio>
-        <div class="account-status" ng-if="pay_not_open" ng-click="open_pay()" >立即开通</div>
+
     </div>
     <div class="pay-submit-div">
         <button ng-click="submit_pay($event)">

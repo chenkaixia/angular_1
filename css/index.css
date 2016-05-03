@@ -255,7 +255,7 @@ body {
 }
 .product-price-container del {
   font-size: 10px;
-  color: #212430;
+  color: #666666;
 }
 .product-price {
   display: inline-block;
@@ -629,14 +629,14 @@ body {
   /* IE 10 */
   flex: 1;
   /* NEW, Spec - Opera 12.1, Firefox 20+ */
-  padding-top: 10px;
 }
 .order-desc {
   font-size: 13px;
-  height: 28px;
+  height: 32px;
   overflow: hidden;
   white-space: normal;
-  line-height: 13px;
+  line-height: 15px;
+  padding-top: 2px;
 }
 .order-price-container {
   /* OLD - iOS 6-, Safari 3.1-6 */
@@ -656,6 +656,7 @@ body {
   /* NEW, Spec - Opera 12.1, Firefox 20+ */
   font-size: 12px;
   color: #999999;
+  padding-top: 10px;
 }
 .order-price {
   width: 3.2rem;

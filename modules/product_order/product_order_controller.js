@@ -76,7 +76,7 @@ define(['angular', 'app', '../product_order/product_order_service'], function (a
                 $rootScope.alert_show("请填写详细地址");
                 return;
             }
-            if(!/^(13[0-9]|14[0-9]|15[0-9]|18[0-9])\d{8}$/i.test($scope.order_data.phone)){
+            if(!/^(13[0-9]|14[0-9]|15[0-9]|18[0-9]|17[0-9])\d{8}$/i.test($scope.order_data.phone)){
                 $rootScope.alert_show("请填写正确的手机号码");
                 return;
             }
@@ -98,8 +98,11 @@ define(['angular', 'app', '../product_order/product_order_service'], function (a
                     localStorage["order"]=JSON.stringify(res.data);
                     $state.go('pay_order');
                 }else{
-                    $rootScope.alert_show(res.msg);
+                    var msg = res&&res.msg?res.msg:"网络问题";
+                    $rootScope.alert_show(msg);
                 }
+            },function () {
+                $rootScope.alert_show("网络问题");
             });
         }
         /**
@@ -107,13 +110,21 @@ define(['angular', 'app', '../product_order/product_order_service'], function (a
         * */
         if(city_list.length==0){
             product_order_service.get_city.get().$promise.then(function (data) {
-                $scope.data.recommend_cities = data.data.recommend_cities;
-                $scope.data.city_group = data.data.city_group;
-                angular.forEach(data.data.city_group, function (group) {
-                    angular.forEach(group.cities, function (city) {
-                        city_list.push(city);
+                if(data&&data.status==0){
+                    $scope.data.recommend_cities = data.data.recommend_cities;
+                    $scope.data.city_group = data.data.city_group;
+                    angular.forEach(data.data.city_group, function (group) {
+                        angular.forEach(group.cities, function (city) {
+                            city_list.push(city);
+                        });
                     });
-                });
+                }else{
+                    var msg = data&&data.msg?data.msg:"网络问题";
+                    $rootScope.alert_show(msg);
+                }
+
+            },function () {
+                $rootScope.alert_show("网络问题");
             });
         }
         //获取焦点
@@ -137,7 +148,7 @@ define(['angular', 'app', '../product_order/product_order_service'], function (a
                     store_only: 0,
                     city_id: city_id
                 }).$promise.then(function (data) {
-                    if(data.data){
+                    if(data&&data.status==0){
                         $scope.data.city =city_name;
                         $scope.data.recommend_hide = true;
                         $scope.data.zones = data.data.zones;
@@ -145,7 +156,12 @@ define(['angular', 'app', '../product_order/product_order_service'], function (a
                         $scope.data.search_name="";
                         $scope.data.search_list=[];
                         $scope.data.search_city=false;
+                    }else{
+                        var msg = data&&data.msg?data.msg:"网络问题";
+                        $rootScope.alert_show(msg);
                     }
+                },function () {
+                    $rootScope.alert_show("网络问题");
                 });
             }else if(site_id){
                 select_school({
@@ -186,7 +202,15 @@ define(['angular', 'app', '../product_order/product_order_service'], function (a
                 product_order_service.search_site.get({
                     keywords: searchWord
                 }).$promise.then(function (res) {
-                    $scope.data.search_school_list =res.data.sites;
+                    if(res&&res.status==0){
+                        $scope.data.search_school_list =res.data.sites;
+                    }else {
+                        var msg = res&&res.msg?res.msg:"网络问题";
+                        $rootScope.alert_show(msg);
+                    }
+
+                },function () {
+                    $rootScope.alert_show("网络问题");
                 })
             } else {
                 $scope.data.search_school_list = []
