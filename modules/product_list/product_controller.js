@@ -1,7 +1,7 @@
 define(['angular','app', '../product_list/product_service'], function (angular,app) {
     'use strict';
     app.controller('product_list_controller', ['$rootScope','$scope', 'product_service', '$state','$location','$cookies', function ($rootScope,$scope, product_service, $state,$location,$cookies) {
-        var start_index = 0, limit = 10;
+        var start_index = 0, limit = 6;
         var fontSize = document.documentElement.style.fontSize;
         document.title="品牌馆";
         fontSize= fontSize.replace("px","");
@@ -13,7 +13,7 @@ define(['angular','app', '../product_list/product_service'], function (angular,a
             $cookies.put('token',token);
         }
         $cookies.put('device_id','1mDSBbBjJkwZCBKcEzexeA1wXH0n8Y9X');
-        $scope.banner = "./res/banner.png";
+        $scope.banner = "./res/banner.jpg";
         window.localStorage.setItem("product_detail","");
         //数据模型
         $scope.dataModel = {

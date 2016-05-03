@@ -30,6 +30,9 @@
 .modal-wrapper {
   height: 100%;
 }
+.disable-pointer-events {
+  pointer-events: auto;
+}
 html,
 body {
   width: 100%;
@@ -146,7 +149,7 @@ body {
   right: 0.64rem;
 }
 .atmosphere {
-  height: 4rem;
+  height: 8rem;
   width: 100%;
 }
 .atmosphere img {
