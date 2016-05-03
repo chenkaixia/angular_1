@@ -1,4 +1,6 @@
 {
+  "status":0,
+"data":{
   "basic_info" : {
     "uid": 50718,
     "role": 0,
@@ -78,4 +80,5 @@
       "status":"1"
     }
   }
+}
 }

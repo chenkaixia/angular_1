@@ -3,6 +3,7 @@ define(['angular','app', '../product_list/product_service'], function (angular,a
     app.controller('product_list_controller', ['$rootScope','$scope', 'product_service', '$state','$location','$cookies', function ($rootScope,$scope, product_service, $state,$location,$cookies) {
         var start_index = 0, limit = 10;
         var fontSize = document.documentElement.style.fontSize;
+        document.title="品牌馆";
         fontSize= fontSize.replace("px","");
         //列表高度
         $scope.itemHeight = 240/25*fontSize+"px";
@@ -26,20 +27,18 @@ define(['angular','app', '../product_list/product_service'], function (angular,a
                 limit: limit
             }).$promise.then(function (data) {
                 $scope.$broadcast('scroll.infiniteScrollComplete');
-                var products = data.data.products;
+                var products = data.data&&data.data.products;
                 if (products == null) {
+                    $scope.dataModel.more_data = false;
                     return false;
                 }
-                angular.forEach(products, function (product) {
-                    product.product_name_1 = product.product_name.substr(0,13);
-                    product.product_name_2 = product.product_name.substr(13);
-                });
-
                 $scope.dataModel.list = $scope.dataModel.list.concat(data.data.products);
                 start_index = start_index + limit;
                 if (data.data.products.length != limit) {
                     $scope.dataModel.more_data = false;
                 }
+            },function () {
+                $scope.$broadcast('scroll.infiniteScrollComplete');
             });
         }
 
@@ -54,6 +53,7 @@ define(['angular','app', '../product_list/product_service'], function (angular,a
             var owner_id = product.owner_id;
                 window.localStorage.setItem("product_id",product_id);
                 window.localStorage.setItem("owner_id",owner_id);
+
             $state.go('product_detail');
         };
 

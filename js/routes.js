@@ -6,7 +6,7 @@ define([], function () {
                 url: '/product_list',
                 templateUrl: 'modules/product_list/product_list.html',
                 controller: 'product_list_controller',
-                prefetchTemplate:false,
+                prefetchTemplate:true,
                 dependencies: [
                     '../modules/product_list/product_controller'
                 ]

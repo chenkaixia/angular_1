@@ -8,8 +8,7 @@
                  ng-click="view_detail(item)">
                 <div>
                     <div class="product-img"><img ng-src="{{item.image}}"></div>
-                    <div class="product-name" ng-bind="item.product_name_1"></div>
-                    <div class="product-name-1" ng-bind="item.product_name_2"></div>
+                    <div class="product-name" ng-bind="item.product_name"></div>
                     <div class="product-price-container">
                         <div class="product-price">¥<span ng-bind="item.price"></span></div>
                         <del class="origin_price">¥<span ng-bind="item.origin_price"></span></del>

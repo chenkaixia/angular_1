@@ -8,7 +8,8 @@ require.config({
         'angular-animate': 'lib/ionic/js/angular/angular-animate',
         'angular-resource': 'lib/ionic/js/angular/angular-resource',
         'angular-sanitize': 'lib/ionic/js/angular/angular-sanitize',
-        'angular-cookies':'lib/ionic/js/angular/angular-cookies'
+        'angular-cookies':'lib/ionic/js/angular/angular-cookies',
+        'angular-debounce':'lib/angular-debounce'
     },
     shim: {
         'angular': {
@@ -27,6 +28,9 @@ require.config({
             deps: ['angular']
         },
         'angular-cookies':{
+            deps: ['angular']
+        },
+        'angular-debounce':{
             deps: ['angular']
         },
         'ionic-angular': {
