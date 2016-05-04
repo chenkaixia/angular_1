@@ -91,7 +91,6 @@ define(['angular', 'app', '../pay_order/product_pay_service'], function (angular
                 if (data.status != 0) {
                     var msg = data && data.msg ? data.msg : "网络问题";
                     $rootScope.alert_show(msg);
-                    ;
                     return false;
                 }
                 var methodes = data.data && data.data.paymethods;
@@ -204,7 +203,7 @@ define(['angular', 'app', '../pay_order/product_pay_service'], function (angular
                             $rootScope.alert_show(msg);
                         }
                     }, function () {
-
+                        $rootScope.alert_show("网络问题，请刷新");
                     });
                 } catch (e) {
                     alert(e.toString());

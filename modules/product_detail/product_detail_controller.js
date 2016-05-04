@@ -30,11 +30,11 @@ define(['angular', 'app', '../product_detail/product_detail_service'], function 
                     $ionicSlideBoxDelegate.update();
                 }, 50);
             }else{
-                var msg = data&&data.msg?data.msg:"网络问题";
+                var msg = data&&data.msg?data.msg:"网络问题！请刷新";
                 $rootScope.alert_show(msg);
             }
         }, function () {
-            $rootScope.alert_show("网络问题");
+            $rootScope.alert_show("网络问题！请刷新");
         });
 
         if (product_detail && product_id == product_detail.product_id) {

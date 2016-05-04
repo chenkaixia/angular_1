@@ -23,7 +23,6 @@ define([
             },
             'responseError': function (rejection) {
                 $load.removeClass('showLoad');
-                $rootScope.alert_show("网络错误");
                 return rejection; // 或新的promise
             }
         };

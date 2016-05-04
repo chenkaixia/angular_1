@@ -30,7 +30,7 @@ define(['angular','app', '../product_list/product_service'], function (angular,a
                 var products = data.data&&data.data.products;
                 if (products == null) {
                     $scope.dataModel.more_data = false;
-                    var msg = data&&data.msg?data.msg:"网络问题";
+                    var msg = data&&data.msg?data.msg:"网络问题！请刷新";
                     $rootScope.alert_show(msg);
                     return false;
                 }

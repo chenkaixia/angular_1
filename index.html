@@ -22,7 +22,11 @@
   <script src="js/md5.js" async></script>
 </head>
 <body>
-  <div ui-view class="content"></div>
+  <div ui-view class="content">
+    <div class="atmosphere">
+      <img src="./res/banner.jpg">
+    </div>
+  </div>
   <div class="loadWrap" id="loadWrap">
     <div id="casePourpre">
       <div id="load">
@@ -39,6 +43,7 @@
     </div>
   </div>
   <div class="alert-pop" ng-bind="alert_text" ng-if="alertShow" ng-class="{'alert-show':alertShow}"></div>
+
   <script src="js/lib/requirejs/require.js" data-main="js/main"></script>
 </body>
 </html>

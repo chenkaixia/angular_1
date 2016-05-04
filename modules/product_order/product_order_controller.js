@@ -98,11 +98,11 @@ define(['angular', 'app', '../product_order/product_order_service'], function (a
                     localStorage["order"]=JSON.stringify(res.data);
                     $state.go('pay_order');
                 }else{
-                    var msg = res&&res.msg?res.msg:"网络问题";
+                    var msg = res&&res.msg?res.msg:"网络问题！请刷新";
                     $rootScope.alert_show(msg);
                 }
             },function () {
-                $rootScope.alert_show("网络问题");
+                $rootScope.alert_show("网络问题！请刷新");
             });
         }
         /**
@@ -156,11 +156,11 @@ define(['angular', 'app', '../product_order/product_order_service'], function (a
                         $scope.data.search_list=[];
                         $scope.data.search_city=false;
                     }else{
-                        var msg = data&&data.msg?data.msg:"网络问题";
+                        var msg = data&&data.msg?data.msg:"网络问题！请刷新";
                         $rootScope.alert_show(msg);
                     }
                 },function () {
-                    $rootScope.alert_show("网络问题");
+                    $rootScope.alert_show("网络问题！请刷新");
                 });
             }else if(site_id){
                 select_school({
@@ -204,12 +204,12 @@ define(['angular', 'app', '../product_order/product_order_service'], function (a
                     if(res&&res.status==0){
                         $scope.data.search_school_list =res.data.sites;
                     }else {
-                        var msg = res&&res.msg?res.msg:"网络问题";
+                        var msg = res&&res.msg?res.msg:"网络问题！请刷新";
                         $rootScope.alert_show(msg);
                     }
 
                 },function () {
-                    $rootScope.alert_show("网络问题");
+                    $rootScope.alert_show("网络问题！请刷新");
                 })
             } else {
                 $scope.data.search_school_list = []
