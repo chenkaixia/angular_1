@@ -6,7 +6,7 @@ define(['angular', 'app', '../pay_order/product_pay_service'], function (angular
             order_sn: "",
             order_amount: 0
         };
-        var product_detail = JSON.parse(localStorage.getItem('product_detail'));
+        var product_detail = localStorage.getItem('product_detail')?JSON.parse(localStorage.getItem('product_detail')):{};
         order = angular.extend(order, JSON.parse(localStorage.getItem('order')));
         var token = localStorage.getItem('token');
         var user_info = {};
@@ -226,7 +226,11 @@ define(['angular', 'app', '../pay_order/product_pay_service'], function (angular
             }
         };
         $scope.open_pay = function () {
-            HXSJSBridge.openCreditPayView();
+            try {
+                HXSJSBridge.openCreditPayView();
+            } catch (e) {
+                
+            }
         };
 
     }]);

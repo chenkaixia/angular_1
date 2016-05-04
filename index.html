@@ -27,8 +27,8 @@
       <img src="./res/banner.jpg">
     </div>
   </div>
-  <div class="loadWrap" id="loadWrap">
-    <div id="casePourpre showLoad">
+  <div class="loadWrap showLoad" id="loadWrap">
+    <div id="casePourpre">
       <div id="load">
         <p>loading</p>
       </div>
@@ -43,7 +43,6 @@
     </div>
   </div>
   <div class="alert-pop" ng-bind="alert_text" ng-if="alertShow" ng-class="{'alert-show':alertShow}"></div>
-
-  <script src="js/lib/requirejs/require.js" data-main="js/main"></script>
+  <script src="js/lib/requirejs/require.js" data-main="js/main" async="async" ></script>
 </body>
 </html>

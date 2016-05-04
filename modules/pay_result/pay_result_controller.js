@@ -17,8 +17,12 @@ define(['app'], function (app) {
             history.go(length);
         };
         $scope.go_order =function () {
-            HXSJSBridge.openOrderListView(10);
-        }
+            try{
+                HXSJSBridge.openOrderListView(10);
+            }catch(e){
+
+            }
+        };
 
     }]);
 });
