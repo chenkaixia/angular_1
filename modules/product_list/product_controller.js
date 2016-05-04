@@ -41,6 +41,7 @@ define(['angular','app', '../product_list/product_service'], function (angular,a
                 }
             },function () {
                 $scope.$broadcast('scroll.infiniteScrollComplete');
+                $scope.dataModel.more_data = false;
                 $rootScope.alert_show("网络问题");
             });
         }
