@@ -119,10 +119,9 @@ define(['angular', 'app', '../product_order/product_order_service'], function (a
                         });
                     });
                 }else{
-                    var msg = data&&data.msg?data.msg:"网络问题";
+                    var msg = data&&data.msg?data.msg:"获取城市列表失败，请刷新。";
                     $rootScope.alert_show(msg);
                 }
-
             },function () {
                 $rootScope.alert_show("网络问题");
             });

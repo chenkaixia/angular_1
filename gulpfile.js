@@ -52,6 +52,10 @@ gulp.task('modules', function() {
     return gulp.src('./modules/**')
         .pipe(gulp.dest('dist/modules'));
 });
+gulp.task('diretive', function() {
+    return gulp.src('./diretive/**')
+        .pipe(gulp.dest('dist/diretive'));
+});
 gulp.task('res', function() {
      gulp.src('./fonts/**')
         .pipe(gulp.dest('dist/fonts'));
@@ -106,7 +110,7 @@ gulp.task('watch', function() {
     gulp.watch(paths.less, ['dev-less']);
 });
 
-gulp.task('build', ['rev-replace-index','dev-less','modules','res'], function() {
+gulp.task('build', ['rev-replace-index','dev-less','modules','res','diretive'], function() {
     return del.sync(['dist/build/**']);
 });
 gulp.task('prod', ['clean'], function() {

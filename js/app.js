@@ -66,7 +66,7 @@ define([
                     $rootScope.alertShow=true;
                     $timeout(function () {
                         $rootScope.alertShow=false;
-                    },1000);
+                    },2000);
                 };
          }]);
     return app;

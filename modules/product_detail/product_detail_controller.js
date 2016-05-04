@@ -42,7 +42,7 @@ define(['angular', 'app', '../product_detail/product_detail_service'], function 
         }
 
         $scope.go_order = function () {
-            $scope.product_detail.img = $scope.product_detail.images[0];
+            $scope.product_detail.img = $scope.product_detail.images&&$scope.product_detail.images[0];
             var product_detail = JSON.stringify($scope.product_detail);
             window.localStorage.setItem("product_detail", product_detail);
             $state.go('order');

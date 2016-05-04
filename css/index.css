@@ -1081,6 +1081,7 @@ body {
   border-radius: 4px;
   left: 1.08rem;
   display: none;
+  z-index: 2000;
 }
 .alert-pop.alert-show {
   display: block;
