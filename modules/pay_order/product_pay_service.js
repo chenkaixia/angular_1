@@ -8,7 +8,6 @@ define(['angular','app'], function (angular,app) {
           return {
               get_pay_methods: $resource('/pay/methods/'),
               get_user:$resource('/user/whole_info'),
-              // get_user:$resource('../modules/pay_order/user.json'),
               get_pay_status:$resource('/mall/getPayStatus'),
               credit_card_trade:$resource('/creditcard/trade'),
               serialize:function (json) {

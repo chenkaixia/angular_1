@@ -6,11 +6,13 @@ define(['angular', 'app', '../pay_order/product_pay_service'], function (angular
             order_sn: "",
             order_amount: 0
         };
+        var product_detail = JSON.parse(localStorage.getItem('product_detail'));
         order = angular.extend(order, JSON.parse(localStorage.getItem('order')));
         var token = localStorage.getItem('token');
         var user_info = {};
         var description = "";
         var method_disabled = false;
+        var pay_not_open = false;
         $scope.pay_not_open = false;
         $scope.data_model = {
             pay_methods: [],
@@ -66,7 +68,7 @@ define(['angular', 'app', '../pay_order/product_pay_service'], function (angular
                     } else if (user_info.account_status == 0) {
                         method_disabled = true;
                         $scope.data_model.pay_type = 1;
-                        $scope.pay_not_open = true;
+                        pay_not_open = true;
                     }
                 } else {
                     var msg = data && data.msg ? data.msg : "网络问题";
@@ -109,6 +111,7 @@ define(['angular', 'app', '../pay_order/product_pay_service'], function (angular
 
                 });
                 $scope.data_model.pay_methods = methodes;
+                $scope.pay_not_open = pay_not_open;
             }, function () {
                 $rootScope.alert_show("网络问题");
             });
@@ -161,13 +164,13 @@ define(['angular', 'app', '../pay_order/product_pay_service'], function (angular
                 try {
                     var time = new Date();
                     time = time.getTime();
-                    var tradeParms = {
+                    var tradeParams = {
                         type: 1,
                         sale_channel: 13,
                         device_type: 1,
                         order_sn: order.order_sn,
                         amount: order.order_amount,
-                        trading_comment: "12344556778",
+                        trading_comment: product_detail.product_name,
                         exemption_status: 0,
                         exemption_open: 0,
                         periods: 1,
@@ -179,10 +182,10 @@ define(['angular', 'app', '../pay_order/product_pay_service'], function (angular
                         call_back_url: order.attach,
                         time: time
                     };
-                    tradeParms = product_pay_service.serialize(tradeParms);
-                    product_pay_service.credit_card_trade.save(tradeParms).$promise.then(function (data) {
+                    tradeParams = product_pay_service.serialize(tradeParams);
+                    product_pay_service.credit_card_trade.save(tradeParams).$promise.then(function (data) {
                         var _data = data.data;
-                        if (data.status == 0) {
+                        if (data&&data.status == 0) {
                             var pay_result = {
                                 amount: _data.amount,
                                 order_id: _data.sale_no,
@@ -191,11 +194,14 @@ define(['angular', 'app', '../pay_order/product_pay_service'], function (angular
                             };
                             localStorage.setItem("pay_result", JSON.stringify(pay_result));
                             $state.go('pay_result');
-                        } else if (data.status == 8) {
+                        } else if (data&&data.status == 8) {
                             $scope.data_model.charge_password = "";
                             $scope.passwords = [];
                             $scope.data_model.show_password = false;
                             $scope.data_model.password_msg = data.msg;
+                        }else{
+                            var msg = data && data.msg ? data.msg : "支付失败";
+                            $rootScope.alert_show(msg);
                         }
                     }, function () {
 
