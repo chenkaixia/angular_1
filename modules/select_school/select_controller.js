@@ -79,7 +79,7 @@ define(['angular', 'app', '../product_order/product_order_service'], function (a
             } else {
                 $scope.data.search_list = []
             }
-        }
+        };
         //搜索学校
         $scope.search_school = function () {
             var searchWord = $scope.data.search_school_name;
@@ -92,7 +92,7 @@ define(['angular', 'app', '../product_order/product_order_service'], function (a
             } else {
                 $scope.data.search_school_list = []
             }
-        }
+        };
         // 返回城市
         $scope.return_city = function () {
             $scope.data.recommend_hide = false;

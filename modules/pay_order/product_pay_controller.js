@@ -1,6 +1,6 @@
 define(['angular', 'app', '../pay_order/product_pay_service'], function (angular, app) {
     'use strict';
-    app.controller('product_pay_controller', ['$rootScope', '$scope', 'product_pay_service', '$stateParams', '$state', '$ionicPopup', '$timeout', function ($rootScope, $scope, product_pay_service, $stateParams, $state, $ionicPopup, $timeout) {
+    app.controller('product_pay_controller', ['$rootScope', '$scope', 'product_pay_service', '$stateParams', '$state', function ($rootScope, $scope, product_pay_service, $stateParams, $state) {
         document.title = "支付订单";
         var order = {
             order_sn: "",
@@ -96,7 +96,7 @@ define(['angular', 'app', '../pay_order/product_pay_service'], function (angular
                 var methodes = data.data && data.data.paymethods;
                 angular.forEach(methodes, function (method) {
                     if (method.pay_type == 8) {
-                        var _description = method.description
+                        var _description = method.description;
                         method.description = description;
                         method.disabled = method_disabled;
                         if ($scope.pay_not_open) {
@@ -146,7 +146,7 @@ define(['angular', 'app', '../pay_order/product_pay_service'], function (angular
                 }
 
             }
-        }
+        };
         $scope.wallet_pay = function (pay) {
 
             if (pay == false) {
@@ -210,7 +210,7 @@ define(['angular', 'app', '../pay_order/product_pay_service'], function (angular
                 }
             }
             $scope.data_model.charge_password = "";
-        }
+        };
         //密码改变
         $scope.change_password = function () {
             var password = $scope.data_model.charge_password;
@@ -224,10 +224,10 @@ define(['angular', 'app', '../pay_order/product_pay_service'], function (angular
             } else if (length < _length) {
                 $scope.passwords.pop();
             }
-        }
+        };
         $scope.open_pay = function () {
             HXSJSBridge.openCreditPayView();
-        }
+        };
 
     }]);
 });

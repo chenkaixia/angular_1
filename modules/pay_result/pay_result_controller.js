@@ -1,6 +1,6 @@
 define(['app'], function (app) {
     'use strict';
-    app.controller('pay_result_controller', ['$scope', '$state','$location',function ($scope, $state,$location) {
+    app.controller('pay_result_controller', ['$scope',function ($scope) {
         document.title="结算";
         var pay_map = {
             "1":"支付宝",

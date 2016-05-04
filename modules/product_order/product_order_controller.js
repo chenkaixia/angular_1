@@ -1,6 +1,6 @@
 define(['angular', 'app', '../product_order/product_order_service'], function (angular, app) {
     'use strict';
-    app.controller('product_order_controller', ['$rootScope','$scope', 'product_order_service', '$stateParams', '$state', '$ionicModal', function ($rootScope,$scope, product_order_service, $stateParams, $state, $ionicModal) {
+    app.controller('product_order_controller', ['$rootScope','$scope', 'product_order_service', '$stateParams', '$state',  function ($rootScope,$scope, product_order_service, $stateParams, $state) {
         document.title="确认下单";
         $scope.show_select=false;
         $scope.show_remark=false;
@@ -66,7 +66,7 @@ define(['angular', 'app', '../product_order/product_order_service'], function (a
         //跳转选择学校界面
         $scope.open_select_school = function () {
             $scope.show_select=true;
-        }
+        };
         $scope.submit_order = function () {
             if($scope.order_data.site_id==""){
                 $rootScope.alert_show("请选择学校");
@@ -85,6 +85,7 @@ define(['angular', 'app', '../product_order/product_order_service'], function (a
             user_info.receiver_address = $scope.order_data.receiver_address;
             user_info.phone = $scope.order_data.phone;
             localStorage.setItem("user_info",JSON.stringify(user_info));
+            //noinspection UnnecessaryLocalVariableJS
             var token = window.localStorage.getItem("token");
             $scope.order_data.token=token;
             delete product_detail.description;
@@ -104,7 +105,7 @@ define(['angular', 'app', '../product_order/product_order_service'], function (a
             },function () {
                 $rootScope.alert_show("网络问题！请刷新");
             });
-        }
+        };
         /**
         * 选择学校
         * */
@@ -193,7 +194,7 @@ define(['angular', 'app', '../product_order/product_order_service'], function (a
             } else {
                 $scope.data.search_list = []
             }
-        }
+        };
         //搜索学校
         $scope.search_school = function () {
             var searchWord = $scope.data.search_school_name;
@@ -214,7 +215,7 @@ define(['angular', 'app', '../product_order/product_order_service'], function (a
             } else {
                 $scope.data.search_school_list = []
             }
-        }
+        };
         // 返回城市
         $scope.return_city = function () {
             $scope.data.recommend_hide = false;
