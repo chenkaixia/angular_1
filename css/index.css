@@ -30,9 +30,6 @@
 .modal-wrapper {
   height: 100%;
 }
-.disable-pointer-events {
-  pointer-events: auto;
-}
 html,
 body {
   width: 100%;
@@ -322,6 +319,9 @@ body {
 .product-detail-content .product-detail-des-container .product-detail-des {
   height: 8.68rem;
   position: relative;
+}
+.product-detail-content .product-detail-des-container .product-detail-des img {
+  width: 100%;
 }
 .product-detail-img {
   display: block;
@@ -1081,7 +1081,6 @@ body {
   border-radius: 4px;
   left: 1.08rem;
   display: none;
-  z-index: 2000;
 }
 .alert-pop.alert-show {
   display: block;
@@ -1151,14 +1150,14 @@ body {
 }
 .account-status {
   position: absolute;
-  top: 0;
+  top: 12px;
   right: 15px;
-  height: 58px;
+  height: 40px;
   background: #ffffff url("../res/ShapeCopy.png") no-repeat 100% 50%;
   background-size: 0.296rem 0.516rem;
   background-origin: content-box;
-  line-height: 2.48rem;
-  width: 3rem;
+  line-height: 40px;
+  width: 75px;
   font-size: 14px;
   color: #07A9FA;
 }
@@ -1563,7 +1562,7 @@ body {
   position: fixed;
   width: 100%;
   height: 100%;
-  z-index: 1200;
+  z-index: 3200;
   top: 0;
   display: none;
 }
@@ -1881,12 +1880,13 @@ body {
 .charge-modal .password-div input {
   opacity: 0;
   color: #fff;
-  width: 100%;
+  width: 150%;
   height: 100%;
   display: block;
   position: absolute;
   z-index: 1010;
   top: 0;
+  left: -50%;
 }
 .charge-modal .charge-bar {
   /* OLD - iOS 6-, Safari 3.1-6 */
