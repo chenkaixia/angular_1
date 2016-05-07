@@ -90,7 +90,10 @@ define(['angular', 'app', '../product_order/product_order_service'], function (a
             $scope.order_data.token=token;
             delete product_detail.description;
 
-            var order_data = product_order_service.serialize($scope.order_data);
+            var order_data_object = angular.extend({}, $scope.order_data);
+            order_data_object.receiver_address =  "【"+$scope.data.school_name+"】"+$scope.order_data.receiver_address;
+
+            var order_data = product_order_service.serialize(order_data_object);
 
             localStorage.setItem("product_detail",JSON.stringify($scope.order_data));
 
