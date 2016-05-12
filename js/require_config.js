@@ -1,15 +1,18 @@
 require.config({
+    baseUrl: '/',
     paths: {
-        'angular': 'lib/ionic/js/angular/angular',
-        'angular-ui-route': 'lib/ionic/js/angular-ui/angular-ui-router',
-        'ionic': 'lib/ionic/js/ionic',
-        'ionic-angular': 'lib/ionic/js/ionic-angular',
-        'domReady': 'lib/requirejs-domready/domReady',
-        'angular-animate': 'lib/ionic/js/angular/angular-animate',
-        'angular-resource': 'lib/ionic/js/angular/angular-resource',
-        'angular-sanitize': 'lib/ionic/js/angular/angular-sanitize',
-        'angular-cookies':'lib/ionic/js/angular/angular-cookies',
-        'angular-debounce':'lib/angular-debounce'
+        'angular': 'js/lib/ionic/js/angular/angular',
+        'angular-ui-route': 'js/lib/ionic/js/angular-ui/angular-ui-router',
+        'ionic': 'js/lib/ionic/js/ionic',
+        'ionic-angular': 'js/lib/ionic/js/ionic-angular',
+        'domReady': 'js/lib/requirejs-domready/domReady',
+        'angular-animate': 'js/lib/ionic/js/angular/angular-animate',
+        'angular-resource': 'js/lib/ionic/js/angular/angular-resource',
+        'angular-sanitize': 'js/lib/ionic/js/angular/angular-sanitize',
+        'angular-cookies':'js/lib/ionic/js/angular/angular-cookies',
+        'app':'js/app',
+        'dependencyResolverFor':'js/dependencyResolverFor',
+        'routes':'js/routes'
     },
     shim: {
         'angular': {
@@ -44,5 +47,6 @@ require.config({
                 'angular-cookies'
             ]
         }
-    }
+    },
+    urlArgs: "version=1.01"
 });

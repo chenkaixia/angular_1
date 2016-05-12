@@ -34,11 +34,15 @@ gulp.task('clean', function() {
 
 //单独压缩requirejs
 gulp.task('script', function() {
-   gulp.src(['js/lib/requirejs/require.js'], {base: 'js'})
+    gulp.src(['js/lib/requirejs/require.js'], {base: 'js'})
         .pipe(uglify())
         .pipe(gulp.dest('dist/js'));
 
     gulp.src(['js/md5.js'], {base: 'js'})
+        .pipe(uglify())
+        .pipe(gulp.dest('dist/js'));
+
+    gulp.src(['js/lib/store.js'], {base: 'js'})
         .pipe(uglify())
         .pipe(gulp.dest('dist/js'));
 
@@ -57,7 +61,7 @@ gulp.task('diretive', function() {
         .pipe(gulp.dest('dist/diretive'));
 });
 gulp.task('res', function() {
-     gulp.src('./fonts/**')
+    gulp.src('./fonts/**')
         .pipe(gulp.dest('dist/fonts'));
     gulp.src('./css/ionic.min.css')
         .pipe(gulp.dest('dist/css'));
@@ -67,37 +71,61 @@ gulp.task('res', function() {
 //根据依赖合并压缩libs
 gulp.task('require', function(taskReady) {
     var requirejsConfig = {
-      baseUrl: './js',
-      name: 'main',
-      paths: {},
-      optimize: 'uglify',//'uglify';
-      mainConfigFile: './js/require_config.js',
-      out: './dist/build/js/main.js',
-      //Inlines the text for any text! dependencies, to avoid the separate
-      //async XMLHttpRequest calls to load those dependencies.
-      inlineText: true,
-      //Allow "use strict"; be included in the RequireJS files.
-      useStrict: true,
-      //Finds require() dependencies inside a require() or define call.
-      findNestedDependencies: true
+        baseUrl: './',
+        name: 'js/main',
+        paths: {},
+        optimize: 'uglify',//'uglify';
+        mainConfigFile: './js/require_config.js',
+        out: './dist/build/js/main.js',
+        //Inlines the text for any text! dependencies, to avoid the separate
+        //async XMLHttpRequest calls to load those dependencies.
+        inlineText: true,
+        //Allow "use strict"; be included in the RequireJS files.
+        useStrict: true,
+        //Finds require() dependencies inside a require() or define call.
+        findNestedDependencies: true
     };
     requirejs.optimize(requirejsConfig, function () {
-      taskReady();
+        taskReady();
     }, function (err) {
-      console.log(err);
-      taskReady();
+        console.log(err);
+        taskReady();
     });
 });
 
 //给js文件添加版本号
 gulp.task('rev-require', ['require', 'script'], function() {
-   return  gulp.src('dist/build/js/*.js', {base: 'dist/build'})
+    return  gulp.src('dist/build/js/*.js', {base: 'dist/build'})
+        .pipe(rev())
         .pipe(gulp.dest('dist'))
+        .pipe(rev.manifest({
+            path: 'dist/build/rev-manifest.json',
+            base: 'dist/build',
+            merge: true
+        }))
         .pipe(gulp.dest('dist/build'));
 });
 
-gulp.task("rev-replace-index", ['index','rev-require'], function(){
-    return gulp.src('dist/index.html').pipe(gulp.dest('dist'));
+gulp.task("rev-replace-main",['rev-require'],function(){
+    var manifest = gulp.src('dist/build/rev-manifest.json');
+    return gulp.src('dist/js/main-*.js')
+        .pipe(revReplace({
+            manifest: manifest,
+            modifyUnreved: replaceJs,
+            modifyReved: replaceJsforMain
+        }))
+        .pipe(gulp.dest('dist/js'));
+});
+
+gulp.task("rev-replace-index", ['index', "rev-require"], function(){
+    var manifest = gulp.src('dist/build/rev-manifest.json');
+    return gulp.src('dist/index.html')
+        .pipe(revReplace({
+            manifest: manifest,
+            modifyUnreved: replaceJs,
+            modifyReved: replaceJs
+        }))
+        .pipe(gulp.dest('dist'));
 });
 
 gulp.task('dev-less', function() {
@@ -110,7 +138,7 @@ gulp.task('watch', function() {
     gulp.watch(paths.less, ['dev-less']);
 });
 
-gulp.task('build', ['rev-replace-index','dev-less','modules','res','diretive'], function() {
+gulp.task('build', ['rev-replace-main','rev-replace-index','dev-less','modules','res','diretive'], function() {
     return del.sync(['dist/build/**']);
 });
 gulp.task('prod', ['clean'], function() {
