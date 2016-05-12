@@ -11,8 +11,8 @@ define([], function () {
                     '../modules/product_list/product_controller'
                 ]
             },
-            'product_detail': {
-                url: '/product_detail',
+            'product_detail':{
+                url: '/product_detail/{product_id}&{owner_id}&{token}',
                 templateUrl: 'modules/product_detail/product_detail.html',
                 controller: 'product_detail_controller',
                 prefetchTemplate:false,
