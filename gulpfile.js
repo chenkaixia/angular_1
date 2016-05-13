@@ -42,10 +42,6 @@ gulp.task('script', function() {
         .pipe(uglify())
         .pipe(gulp.dest('dist/js'));
 
-    gulp.src(['js/lib/store.js'], {base: 'js'})
-        .pipe(uglify())
-        .pipe(gulp.dest('dist/js'));
-
 });
 
 gulp.task('index', function() {

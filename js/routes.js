@@ -12,7 +12,7 @@ define([], function () {
                 ]
             },
             'product_detail':{
-                url: '/product_detail/{product_id}&{owner_id}&{token}',
+                url: '/product_detail/{product_id}&{owner_id}&?{token}',
                 templateUrl: 'modules/product_detail/product_detail.html',
                 controller: 'product_detail_controller',
                 prefetchTemplate:false,
