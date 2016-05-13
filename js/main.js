@@ -4,7 +4,7 @@
  */
 
 
-define(['require_config'], function() {
+define(['js/require_config'], function() {
 	require(['domReady!','angular','app'], function (document,angular) {
 		angular.bootstrap(document, ['app']);
   	});

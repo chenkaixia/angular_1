@@ -58,7 +58,11 @@ define(['angular','app', '../product_list/product_service'], function (angular,a
                 window.localStorage.setItem("product_id",product_id);
                 window.localStorage.setItem("owner_id",owner_id);
 
-            $state.go('product_detail');
+            $state.go('product_detail',{
+                product_id:product_id,
+                owner_id:owner_id,
+                token:token
+            });
         };
 
     }]);

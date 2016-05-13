@@ -1,10 +1,18 @@
 define(['angular', 'app', '../product_detail/product_detail_service'], function (angular, app) {
     'use strict';
-    app.controller('product_detail_controller', ['$rootScope', '$scope', 'product_detail_service', '$stateParams', '$state', '$ionicSlideBoxDelegate', '$timeout', function ($rootScope, $scope, product_service, $stateParams, $state, $ionicSlideBoxDelegate, $timeout) {
+    app.controller('product_detail_controller', ['$rootScope', '$scope', 'product_detail_service', '$stateParams', '$state', '$ionicSlideBoxDelegate', '$timeout','$cookies', function ($rootScope, $scope, product_service, $stateParams, $state, $ionicSlideBoxDelegate, $timeout,$cookies) {
 
         document.title = "商品详情";
-        var product_id = localStorage.getItem("product_id");
-        var owner_id = localStorage.getItem("owner_id");
+        // var product_id = localStorage.getItem("product_id");
+        // var owner_id = localStorage.getItem("owner_id");
+        var product_id =  $stateParams.product_id;
+        var owner_id = $stateParams.owner_id;
+        var token = $stateParams.token;
+        if(token){
+            window.localStorage.setItem('token',token);
+            $cookies.put('token',token);
+        }
+
         var product_detail = window.localStorage.getItem("product_detail");
         product_detail = product_detail ? JSON.parse(product_detail) : {};
         $scope.product_detail = {
@@ -19,6 +27,7 @@ define(['angular', 'app', '../product_detail/product_detail_service'], function 
             num: 1,
             total_amount: 0
         };
+
         product_service.get_detail.get({
             product_id: product_id,
             owner_id: owner_id
