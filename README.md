@@ -1,9 +1,53 @@
-环境：
-安装note.js
-gulp
-npm install -g gulp
+# 品牌馆H5项目
 
-项目编译执行命令
-1、npm install
-2、gulp prod
-编译后的项目路径：dist
+- 主要功能
+        59store的移动端应用品牌馆h5
+- 前端技术方案
+    - angular
+    - gulp
+- 文件目录结构
+    - mall/
+        - res/ #资源文件目录
+            - ...
+        - diretive/ #自定义指令
+                  - ...
+        - fonts/ #系统字体文件
+                   - ...
+        - js/ #基础文件
+            -/lib #应用库
+            -/main.js #主程序
+            -/app.js #应用程序
+             - ...
+        - less/ # 样式文件
+             - ...
+        - modules/ #业务模块
+            - ...
+        - ...
+- 本地搭建流程
+    1. 安装 **[node.js](http://nodejs.org/)**
+    - 全局安装gulp:
+        - **npm install -g gulp**
+    - 全局安装bower
+        - **npm install -g bower**
+    - 项目根目录下安装依赖包
+        - **npm install**
+    - 如果项目根目录下没有dist文件夹，手动新建dist文件夹
+        - dist文件夹即为项目发布目录
+    - 构建命令：
+        - **生产环境**: **gulp prod**
+        - **开发环境**: **gulp dev**
+- 开发、测试服务器地址
+    - qa环境
+        - 服务器地址：192.168.30.234
+        - 项目目录： /home/qaadmin/h5/
+        - 访问域名：http://m.yemao.59shangcheng.com/
+    - stage环境
+        - 服务地址： 120.26.131.86
+        - 项目目录: /data/www/h5/
+        - 访问域名: http://m.yemao.59store.net/
+- 项目负责前端
+    - 小倩，香蕉，柏舟
+- 合作角色
+    - 产品： 未知
+    - 后端： 凌云
+    - 设计： 未知
