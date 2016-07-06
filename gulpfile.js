@@ -31,9 +31,20 @@ function replaceJsforMain(filename) {
 gulp.task('clean', function() {
     return del.sync(['dist/*']);
 });
-
+gulp.task('less', function() {
+    return gulp.src(paths.less)
+        .pipe(less())
+        .pipe(rev())
+        .pipe(gulp.dest('dist/css'))
+        .pipe(rev.manifest({
+            path: 'dist/build/rev-manifest.json',
+            base: 'dist/build',
+            merge: true
+        }))
+        .pipe(gulp.dest('dist/build'));
+});
 //单独压缩requirejs
-gulp.task('script', function() {
+gulp.task('script',['less'], function() {
     gulp.src(['js/lib/requirejs/require.js'], {base: 'js'})
         .pipe(uglify())
         .pipe(gulp.dest('dist/js'));
@@ -59,8 +70,6 @@ gulp.task('diretive', function() {
 gulp.task('res', function() {
     gulp.src('./fonts/**')
         .pipe(gulp.dest('dist/fonts'));
-    gulp.src('./css/ionic.min.css')
-        .pipe(gulp.dest('dist/css'));
     gulp.src('./res/**')
         .pipe(gulp.dest('dist/res'));
 });
@@ -134,7 +143,26 @@ gulp.task('watch', function() {
     gulp.watch(paths.less, ['dev-less']);
 });
 
-gulp.task('build', ['rev-replace-main','rev-replace-index','dev-less','modules','res','diretive'], function() {
+gulp.task("rev-replace-images",['rev-images'], function(){
+    var manifest = gulp.src('dist/build/rev-manifest.json');
+    return gulp.src('dist/css/index-*.css')
+        .pipe(revReplace({
+            manifest: manifest
+        }))
+        .pipe(gulp.dest('dist/css'));
+});
+gulp.task('rev-images', function() {
+    return gulp.src('res/images/icon.png', {base: 'res'})
+        .pipe(rev())
+        .pipe(gulp.dest('dist/res'))
+        .pipe(rev.manifest({
+            path: 'dist/build/rev-manifest.json',
+            base: 'dist/build',
+            merge: true
+        }))
+        .pipe(gulp.dest('dist/build'));
+});
+gulp.task('build', ['rev-replace-images','rev-replace-main','rev-replace-index','modules','res','diretive'], function() {
     return del.sync(['dist/build/**']);
 });
 gulp.task('prod', ['clean'], function() {
