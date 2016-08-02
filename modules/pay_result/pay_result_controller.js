@@ -20,7 +20,7 @@ define(['app'], function (app) {
             try{
                 HXSJSBridge.openOrderListView(10);
             }catch(e){
-
+                
             }
         };
 
